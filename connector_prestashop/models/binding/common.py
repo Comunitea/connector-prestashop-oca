@@ -21,14 +21,6 @@ class PrestashopBinding(models.AbstractModel):
     prestashop_id = fields.Integer("ID on PrestaShop")
     no_export = fields.Boolean("No export to PrestaShop")
 
-    _sql_constraints = [
-        (
-            "prestashop_uniq",
-            "unique(backend_id, prestashop_id)",
-            "A record with same ID on PrestaShop already exists.",
-        ),
-    ]
-
     def check_active(self, backend):
         if not backend.active:
             raise RetryableJobError(
